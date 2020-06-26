@@ -1,13 +1,14 @@
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, FontAwesome, Entypo } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import TabOneScreen from '../screens/TabOneScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
-import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
+import AddExecutionScreen from '../screens/AddExecutionScreen';
+import TrackExercisesScreen from '../screens/TrackExercisesScreen';
+import ListExecutionsScreen from '../screens/ListExecutionsScreen';
+import { BottomTabParamList, AddExecutionParamList, TrackExercisesParamList, ListExecutionsParamList } from '../types';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -17,19 +18,26 @@ export default function BottomTabNavigator() {
   return (
     <BottomTab.Navigator
       initialRouteName="TabOne"
-      tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
+      tabBarOptions={{ activeTintColor: Colors[colorScheme].tint,  showLabel: false }}>
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneNavigator}
+        name="Add"
+        component={AddExecutionNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: ({ color }) => <FontAwesome name="plus-circle" size={28} color={color} />,
         }}
       />
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoNavigator}
+        name="Track"
+        component={TrackExercisesNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: ({ color }) => <Entypo name="area-graph" size={28} color={color} />,
+        }}
+      />
+    <BottomTab.Screen
+        name="List"
+        component={ListExecutionsNavigator}
+        options={{
+          tabBarIcon: ({ color }) => <FontAwesome name="list" size={24} color={color} />,
         }}
       />
     </BottomTab.Navigator>
@@ -38,36 +46,50 @@ export default function BottomTabNavigator() {
 
 // You can explore the built-in icon families and icons on the web at:
 // https://icons.expo.fyi/
-function TabBarIcon(props: { name: string; color: string }) {
-  return <Ionicons size={30} style={{ marginBottom: -3 }} {...props} />;
-}
+//function TabBarIcon(props: { name: string; color: string }) {
+//  return <Ionicons size={30} style={{ marginBottom: -3 }} {...props} />;
+//}
 
 // Each tab has its own navigation stack, you can read more about this pattern here:
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
-const TabOneStack = createStackNavigator<TabOneParamList>();
+const AddExecutionStack = createStackNavigator<AddExecutionParamList>();
 
-function TabOneNavigator() {
+function AddExecutionNavigator() {
   return (
-    <TabOneStack.Navigator>
-      <TabOneStack.Screen
-        name="TabOneScreen"
-        component={TabOneScreen}
-        options={{ headerTitle: 'Tab One Title' }}
+    <AddExecutionStack.Navigator>
+      <AddExecutionStack.Screen
+        name="AddExecutionScreen"
+        component={AddExecutionScreen}
+        options={{ headerTitle: 'Add execution' }}
       />
-    </TabOneStack.Navigator>
+    </AddExecutionStack.Navigator>
   );
 }
 
-const TabTwoStack = createStackNavigator<TabTwoParamList>();
+const TrackExercisesStack = createStackNavigator<TrackExercisesParamList>();
 
-function TabTwoNavigator() {
+function TrackExercisesNavigator() {
   return (
-    <TabTwoStack.Navigator>
-      <TabTwoStack.Screen
-        name="TabTwoScreen"
-        component={TabTwoScreen}
-        options={{ headerTitle: 'Tab Two Title' }}
+    <TrackExercisesStack.Navigator>
+      <TrackExercisesStack.Screen
+        name="TrackExercisesScreen"
+        component={TrackExercisesScreen}
+        options={{ headerTitle: 'Track exercises' }}
       />
-    </TabTwoStack.Navigator>
+    </TrackExercisesStack.Navigator>
+  );
+}
+
+const ListExecutionsStack = createStackNavigator<ListExecutionsParamList>();
+
+function ListExecutionsNavigator() {
+  return (
+    <ListExecutionsStack.Navigator>
+      <ListExecutionsStack.Screen
+        name="ListExecutionsScreen"
+        component={ListExecutionsScreen}
+        options={{ headerTitle: 'List executions' }}
+      />
+    </ListExecutionsStack.Navigator>
   );
 }
