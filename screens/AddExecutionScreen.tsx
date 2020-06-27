@@ -2,6 +2,7 @@ import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
+import SpeechToTextButton from '../components/SpeechToTextButton';
 import { Text, View } from '../components/Themed';
 
 export default function AddExecutionScreen() {
@@ -9,6 +10,7 @@ export default function AddExecutionScreen() {
     <View style={styles.container}>
       <Text style={styles.title}>Add Execution</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+      <SpeechToTextButton />
       {/* <EditScreenInfo path="/screens/AddExecutionScreen.tsx" /> */}
     </View>
   );
@@ -16,11 +18,12 @@ export default function AddExecutionScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 2,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
   title: {
+    paddingTop: '75.5%',
     fontSize: 20,
     fontWeight: 'bold',
   },
